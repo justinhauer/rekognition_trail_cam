@@ -1,4 +1,5 @@
 from aws_lambda_powertools import Logger
+from typing import List, Dict, Any
 from src.services.rekognition_service import (
     detect_labels,
     process_labels,
@@ -10,7 +11,7 @@ from src.models.event_model import Event
 logger: Logger = Logger()
 
 
-def lambda_handler(event: Event, context):
+def lambda_handler(event: Event, context: Any) -> Dict[str, Any]:
     record = event.Records[0]
     bucket_name = record.s3.bucket.name
     object_key = record.s3.object.key
